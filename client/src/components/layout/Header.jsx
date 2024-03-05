@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
-import { AppBar,Box, Typography,Toolbar,IconButton, Tooltip } from '@mui/material'
+import React, { Suspense, lazy, useState} from 'react'
+import { AppBar,Box, Typography,Toolbar,IconButton, Tooltip, Backdrop } from '@mui/material'
 import { orange } from '../../constants/color'
 import {Menu as MenuIcon} from "@mui/icons-material"
 import {Search as SearchIcon,Add as AddIcon,Group as GroupIcon,Logout as LogoutIcon,Notifications as NotificationsIcon } from "@mui/icons-material"
-import { useNavigate} from 'react-router-dom'
-import Search from '../specific/Search'
+import { useNavigate} from 'react-router-dom';
+
+const SearchDialog=lazy(()=>import("../specific/Search"));
+const NotificationDialog=lazy(()=>import("../specific/Notifications"));
+const NewGroupDialog=lazy(()=>import("../specific/NewGroup"));
+
+
 
 const Header = () => {
 const navigate = useNavigate();
@@ -94,7 +99,11 @@ const[isNotification,setIsNotification]= useState(false);
         </Toolbar>
         </AppBar>
   </Box>
-  {isSearch &&<Search/>}
+  {isSearch && (<Suspense fallback={<Backdrop open/>}><SearchDialog/></Suspense>)}
+
+  {isNotification && (<Suspense fallback={ <Backdrop open/>}><NotificationDialog/></Suspense>)}
+
+  {isNewGroup && (<Suspense fallback={<Backdrop open/>} ><NewGroupDialog/></Suspense>)}
   </>
 
  
