@@ -16,7 +16,7 @@ const Chat = lazy(
 const Group = lazy(
                 ()=> import("./pages/Group"));    
 const NotFound = lazy(()=> import("./pages/NotFound"));                    
-                let user = true;                  
+                let user = true;                 
  
  const App = () => {
    return (
