@@ -6,7 +6,7 @@ const UserItem = ({user,handler,handlerIsLoading,isAdded=false}) => {
     const{name,_id,avatar}=user;
   return (
      <ListItem>
-        <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+        <Stack direction={"row"} alignItems={"center"} spacing={"1rem"} width={"100%"}>
             <Avatar/>
             <Typography
             variant="body1"

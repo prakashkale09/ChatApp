@@ -6,10 +6,16 @@ import { AttachFile as AttachFileIcon, Send as SendIcon } from '@mui/icons-mater
 import { InputBox } from '../components/styles/StyledComponents';
 import { grayColor, orange } from '../constants/color';
 import FileMenu from '../components/dialogs/FileMenu';
- 
+import { sampleMessage } from '../constants/sampleData';
+import MessageComponent from '../components/shared/MessageComponent';
+    const user={
+      _id:"123",
+      name:"Prakash Kale"
+    }
      const Chat = ()=>
      {
       const containerRef=useRef(null);
+      
         return (
          <>
          <Stack ref={containerRef} boxSizing={"border-box"} padding={"1rem"} spacing={"1rem"}
@@ -18,6 +24,11 @@ import FileMenu from '../components/dialogs/FileMenu';
             overflowX:"hidden",
             overflowY:"auto",
          }}>
+            {
+                sampleMessage.map((i)=>(
+                  <MessageComponent key={i._id}message={i} user={user}/>
+                ))
+            }
          </Stack>
 
          <form 
@@ -29,7 +40,9 @@ import FileMenu from '../components/dialogs/FileMenu';
                         position:"absolute",
                         left:"1.5rem",
                         rotate:"30deg",
-                     }}>
+                     }}
+                    
+                     >
                         <AttachFileIcon/>
                      </IconButton>
 
@@ -38,7 +51,7 @@ import FileMenu from '../components/dialogs/FileMenu';
                      <IconButton type="submit"
                      sx={{
                         
-                        backgroundColor:orange,
+                        bgvcolor:orange,
                         color:"white",
                         marginLeft:"1rem",
                         padding:"0.5rem",
@@ -50,7 +63,7 @@ import FileMenu from '../components/dialogs/FileMenu';
                      </IconButton>
                   </Stack>
                </form>
-               <FileMenu/>
+               <FileMenu />
          </>
         )
      };
