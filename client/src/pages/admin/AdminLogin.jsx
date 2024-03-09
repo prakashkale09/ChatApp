@@ -5,7 +5,7 @@ import { Container,Paper, Typography,TextField,Button,Avatar,Stack,IconButton } 
 import { bgGradient } from '../../constants/color';
 import { useInputValidation } from '6pp';
 
-const isAdmin=false;
+const isAdmin=true;
 const AdminLogin = () => {
     const secretKey=useInputValidation("")
     const submitHandler=(e)=>

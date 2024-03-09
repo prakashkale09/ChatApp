@@ -1,8 +1,8 @@
 import { Box, Drawer, Grid, IconButton,Stack, Typography, styled } from '@mui/material'
 import React, { useState } from 'react'
 import { grayColor, matBlack } from '../../constants/color'
-import { Close as CloseIcon, Menu as MenuIcon,Dashboard as DashboardIcon, ManageAccounts as ManageAccountsIcon, Groups as GroupsIcon, Message as MessageIcon } from '@mui/icons-material'
-import { useLocation,Link as LinkComponent } from 'react-router-dom'
+import { Close as CloseIcon, Menu as MenuIcon,Dashboard as DashboardIcon, ManageAccounts as ManageAccountsIcon, Groups as GroupsIcon, Message as MessageIcon, ExitToApp as ExitToAppIcon} from '@mui/icons-material'
+import { useLocation,Link as LinkComponent, Navigate } from 'react-router-dom'
  
  
 const Link= styled(LinkComponent)`
@@ -21,22 +21,25 @@ const adminTabs=[{
 },
 {
     name:"Users",
-    path:"/admin/users-management",
+    path:"/admin/users",
     icon:<ManageAccountsIcon/>
 },
 {
     name:"Chats",
-    path:"/admin/chats-management",
+    path:"/admin/chats",
     icon:<GroupsIcon/>
 },
 {
     name:"Messages",
-    path:"/admin/messages-management",
+    path:"/admin/messages",
     icon:<MessageIcon/>
 }]
 const Sidebar=({w="100%"})=>
 {
     const location=useLocation();
+    const logoutHandler=()=>{
+        console.log("Logout");
+    }
     return(
         <Stack width={w} direction={"column"} p={"3rem"} spacing={"3rem"}>
             <Typography variant='h5' textTransform={"uppercase"}>
@@ -53,20 +56,29 @@ const Sidebar=({w="100%"})=>
                  }}>
                     <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
                         {tab.icon}
-                        <Typography>{tab.name}</Typography>
+                        <Typography fontSize={"1.2rem"}>{tab.name}</Typography>
                     </Stack>
                  </Link>
                 ))
              }
+              <Link  onClick={logoutHandler}
+                  >
+                    <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+                        <ExitToAppIcon/>
+                        <Typography fontSize={"1.2rem"}> Logout</Typography>
+                    </Stack>
+                 </Link>
             </Stack>
         </Stack>
     )
 }
 
+const isAdmin=true;
 const AdminLayout = ({children}) => {
     const [isMobile,setIsMobile]=useState(false);
     const handleMobile=()=> setIsMobile(!isMobile);
     const handleClose=()=>setIsMobile(false)
+    if(!isAdmin) return <Navigate to="/admin"/>
   return (
      <Grid container minHeight={"100vh"}>
         <Box   sx={{
